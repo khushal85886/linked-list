@@ -1,0 +1,91 @@
+package linkedList;
+
+import java.util.Scanner;
+
+import javax.print.DocFlavor.INPUT_STREAM;
+
+public class deleteNode<T> {
+	
+	T data;
+	deleteNode<Integer> next;
+	public deleteNode(T data) {
+		
+		this.data=data;
+		next=null;
+	}
+
+	public static deleteNode<Integer> takeInput()
+	{
+		deleteNode<Integer> head =null;
+		deleteNode<Integer> tail =null;
+		Scanner s =new Scanner(System.in);
+		System.out.println("Enter the data at nodes of the linked list and then enter -1 : ");
+		int data = s.nextInt();
+		
+		while(data !=-1)
+		{
+			deleteNode<Integer> newNode = new deleteNode<Integer>(data);
+
+			if(head == null)
+			{
+				head =newNode;
+				tail=newNode;
+				
+			}
+			
+			tail.next=newNode;
+			tail=tail.next;
+			
+			data=s.nextInt();
+		}
+		
+		return head;
+	}
+	
+	public static deleteNode<Integer> delete(deleteNode<Integer> head , int pos)
+	{
+		deleteNode<Integer> temp =head;
+		if(head ==null)
+		{
+			System.out.println("there is no node in the list to delete ");
+		}
+		
+		if(pos == 0)
+		{
+			head=temp.next;
+		}
+		
+		int i=0;
+		while(i<pos-1)
+		{
+			temp=temp.next;
+			i++;
+		}
+		deleteNode<Integer> next=temp.next.next;
+		temp.next=next;
+		
+		
+		return head;
+	}
+	
+	public static void print(deleteNode<Integer> head)
+	{
+		while(head!=null)
+		{
+			System.out.print(head.data + "  ");
+			head=head.next;
+		}
+	}
+	
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		deleteNode<Integer> head = takeInput();
+		System.out.println("Enter the position at which the data is to be deleted :  ");
+		int pos= s.nextInt();
+		head=delete(head,pos);
+		print(head);
+		
+
+	}
+
+}
