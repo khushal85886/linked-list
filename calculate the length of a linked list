@@ -1,0 +1,66 @@
+package linkedList;
+
+import java.util.Scanner;
+
+public class listLength<T> 
+{
+	
+	T data;
+	listLength<T> next;
+	
+	public listLength(T data) {
+		// TODO Auto-generated constructor stub
+		this.data=data;
+	}
+	
+	public static listLength<Integer>  takeInput()
+	{
+		listLength<Integer> head = null;
+		listLength<Integer> tail =null;
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter the nodes in the list and then press -1 : ");
+		int data =s.nextInt();
+		
+		while(data!=-1)
+		{
+			listLength<Integer> newNode = new listLength<Integer>(data);
+			if(head==null)
+			{
+				head = newNode;
+				tail=newNode;
+			}
+			
+			tail.next=newNode;
+			tail=tail.next;
+			
+			data = s.nextInt();
+		}
+		
+		return head;
+	}
+	
+	public static int calculateLength(listLength<Integer> head)
+	{
+		int i=0;
+		while(head!=null)
+		{
+			head=head.next;
+			i++;
+		}
+		return i;
+	}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s =new Scanner(System.in);
+		
+		listLength<Integer> head=takeInput();
+		
+		int length = calculateLength(head);
+		System.out.println("The size of the linked list is  :  "+length);
+		
+		
+		}
+
+}
