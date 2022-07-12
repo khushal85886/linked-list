@@ -1,0 +1,88 @@
+package linkedList;
+
+import java.util.Scanner;
+
+public class reverseList<T> {
+
+	T data;
+	reverseList<T> next;
+	
+	public reverseList(T data) {
+		// TODO Auto-generated constructor stub
+		this.data=data;
+		next=null;
+	}
+	
+	public static reverseList<Integer> takeInput()
+	{	
+		reverseList<Integer> head = null;
+		reverseList<Integer> tail = null;
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("enter the nodes pf the linked list and press -1 :  ");
+		int data = s.nextInt();
+		
+		while(data!=-1)
+		{
+			reverseList<Integer> newNode = new reverseList<Integer>(data);
+			
+			if(head==null)
+			{
+				head = newNode;
+				tail=newNode;
+						
+			}
+			
+			tail.next=newNode;
+			tail=tail.next;
+			data=s.nextInt();
+			
+		}
+		
+		return head ;
+	}
+	
+	public static void print(reverseList<Integer> head)
+	{
+		while(head!=null)
+		{
+			System.out.print(head.data + "  " );
+			head=head.next;
+		}
+	}
+	
+	public static reverseList<Integer> reverse(reverseList<Integer> head)
+	{
+		reverseList<Integer> current = head ;
+		reverseList<Integer> next = null;
+		reverseList<Integer> previous= null;
+		
+		while(current!=null)
+		{
+			next = current.next;
+			current.next = previous;
+			previous =current;
+			current= next;
+		}
+		
+		return previous;
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		reverseList<Integer> head = takeInput();
+		System.out.println("before reversing the list is as follows : ");
+		print(head);
+		
+		System.out.println();
+		head = reverse(head);
+		System.out.println("after reversing the list is  as follows :  ");
+		print(head);
+		
+				
+
+	}
+
+}
