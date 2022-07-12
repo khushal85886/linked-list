@@ -1,0 +1,73 @@
+package linkedList;
+
+import java.util.Scanner;
+
+public class dataAtGivenNode<T> {
+	
+	T data;
+	dataAtGivenNode<T> next;
+	
+	public dataAtGivenNode(T data) {
+		this.data=data;
+		next=null;
+	}
+	
+	public static dataAtGivenNode<Integer> takeInput()
+	{
+		dataAtGivenNode<Integer> head =null;
+		dataAtGivenNode<Integer> tail =null;
+		Scanner s =new Scanner(System.in);
+		System.out.println("Enter the data at nodes of the linked list and then enter -1 : ");
+		int data = s.nextInt();
+		
+		while(data !=-1)
+		{
+			dataAtGivenNode<Integer> newNode = new dataAtGivenNode<Integer>(data);
+
+			if(head == null)
+			{
+				head =newNode;
+				tail=newNode;
+				
+			}
+			
+			tail.next=newNode;
+			tail=tail.next;
+			
+			data=s.nextInt();
+		}
+		
+		return head;
+	}
+	
+	public static int dataAtPos(dataAtGivenNode<Integer> head,int pos)
+	{
+		int i=0;
+		int data;
+		if(pos==0)
+		{
+			return -1;
+		}
+		while(i<pos)
+		{
+			head = head.next;
+			i++;
+		}
+		data=head.data;
+		
+		return data;
+	}
+
+	public static void main(String[] args) {
+		
+		Scanner s = new Scanner(System.in);
+		dataAtGivenNode<Integer> head = takeInput();
+		System.out.println("enter the position of the node :  ");
+		int pos = s.nextInt();
+		
+		int data = dataAtPos(head, pos);
+		System.out.println("Data at given node is  :  "+data);
+
+	}
+
+}
