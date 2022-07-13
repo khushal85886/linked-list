@@ -1,0 +1,69 @@
+package linkedList;
+
+import java.util.Scanner;
+
+public class findNode<T> {
+	
+	T data;
+	findNode<T> next;
+	
+	public findNode(T data) {
+		// TODO Auto-generated constructor stub
+		this.data=data;
+		next = null;
+	}
+	
+	public static findNode<Integer> takeInput()
+	{
+		Scanner s = new Scanner(System.in);
+		
+		findNode<Integer> head = null;
+		findNode<Integer> tail = null;
+		System.out.println("Enter the nodes of the lists and then enter -1 :  ");
+		int data = s.nextInt();
+		
+		while(data!=-1)
+		{
+			findNode<Integer> newNode = new findNode<Integer>(data);
+			
+			if(head==null)
+			{
+				head = newNode;
+				tail=newNode;
+			}
+			tail.next=newNode;
+			tail=tail.next;
+			data= s.nextInt();
+		}
+		return head ;
+	}
+	
+	public static int find(findNode<Integer> head,int num)
+	{
+		int i=0;
+		while(head!=null)
+		{
+			if(head.data==num)
+			{
+				return i;
+			}
+			head=head.next;
+			i++;
+		}
+		return i;
+	}
+
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		findNode<Integer> head  = takeInput();
+		System.out.println("enter the element to search :  ");
+		int num = s.nextInt();
+		
+		int index =find(head,num);
+		System.out.println("Data is present at indedx :  "+ index); 
+
+		
+	}
+
+}
