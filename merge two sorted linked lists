@@ -1,0 +1,96 @@
+package linkedList;
+
+import java.util.Scanner;
+
+public class mergeList {
+	
+	int data;
+	mergeList next;
+	
+	public mergeList(int data) {
+		// TODO Auto-generated constructor stub
+		this.data=data;
+		next=null;
+	}
+	
+	public static mergeList takeInput()
+	{
+		mergeList head = null;
+		mergeList tail = null;
+		System.out.println("Enter the nodes for the llist in the sorted manner and then press -1 : ");
+		Scanner s=new Scanner(System.in);
+		
+		int data= s.nextInt();
+		while(data!=-1)
+		{
+			mergeList newNode = new mergeList(data);
+			if(head==null)
+			{
+				head=newNode;
+				tail=newNode;
+			}
+			tail.next=newNode;
+			tail=tail.next;
+			
+			data=s.nextInt();
+		}
+		return head;
+	}
+	
+	public static mergeList merge(mergeList h1,mergeList h2)
+	{
+		mergeList h3 = new mergeList(0);
+		mergeList t3=h3;
+		
+		while(h1!=null && h2!=null)
+		{
+			if(h1.data <h2.data)
+			{
+				t3.next=h1;
+				h1=h1.next;
+			}
+			else
+			{
+				t3.next=h2;
+				h2=h2.next;
+			}
+			t3=t3.next;
+		}
+		
+			while(h1!=null)
+			{
+
+				t3.next=h1;
+				h1=h1.next;
+			}
+		
+			while(h2!=null)
+			{
+
+				t3.next=h1;
+				h2=h2.next;
+			}
+
+		
+		return h3.next;
+	}
+	
+	public static void print(mergeList head)
+	{
+		while(head!=null)
+		{
+			System.out.print(head.data + "  ");
+			head=head.next;
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		mergeList h1=takeInput();
+		mergeList h2 = takeInput();
+		
+		mergeList h3=merge(h1, h2);
+		print(h3);
+	}
+
+}
