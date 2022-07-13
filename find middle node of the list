@@ -1,0 +1,61 @@
+package linkedList;
+import java.util.Scanner;
+
+public class midpoint<T> {
+	
+	T data;
+	midpoint<T> next;
+	
+	public midpoint(T data) {
+		this.data = data;
+		next = null;
+	}
+	
+	public static midpoint<Integer> takeInput()
+	{
+		Scanner s = new Scanner(System.in);
+		
+		midpoint<Integer> head = null;
+		midpoint<Integer> tail = null;
+		System.out.println("Enter the nodes of the lists and then enter -1 :  ");
+		int data = s.nextInt();
+		
+		while(data!=-1)
+		{
+			midpoint<Integer> newNode = new midpoint<Integer>(data);
+			
+			if(head==null)
+			{
+				head = newNode;
+				tail=newNode;
+			}
+			tail.next=newNode;
+			tail=tail.next;
+			data= s.nextInt();
+		}
+		return head ;
+	}
+
+	public static int mid(midpoint<Integer> head)
+	{
+		midpoint<Integer> fast=head;
+		midpoint<Integer> slow=head;
+		
+		while(fast!=null && fast.next!=null)
+		{
+			slow=slow.next;
+			fast=fast.next.next;
+		}
+		int res= slow.data;
+		return res;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		midpoint<Integer> head = takeInput();
+
+		int midP = mid(head);
+		System.out.println("element at the middle node is  :  " + midP);
+	}
+
+}
